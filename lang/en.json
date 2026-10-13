@@ -78,7 +78,9 @@
         "Midi": {
           "Legend": "Midi-QoL"
         }
-      }
+      },
+      "EnableNativeGenericActions": "Enable Native D&D Actions",
+      "EnableNativeGenericActionsHint": "Show common Dash, Disengage, Dodge, Help, Hide, and Ready actions in the HUD without requiring CPR or Midi-QoL."
     },
     "AutoPopulate": {
       "Groups": {
@@ -214,11 +216,39 @@
       "SlotOccupiedByTwoHandedWeapon": "This slot is occupied by a two-handed weapon",
       "FailedToRollInitiative": "Failed to roll initiative",
       "ActivityNotFound": "Activity not found",
-      "ActivityCannotBeUsed": "Activity cannot be used"
+      "ActivityCannotBeUsed": "Activity cannot be used",
+      "NativeActionError": "Failed to use {action}"
     },
     "AutoPopulateOptions": {
       "IncludeActivities": "Include Individual Activities",
       "IncludeActivitiesHint": "When enabled, items with multiple activities (e.g., Thrown weapons) will add each activity separately instead of the parent item"
+    },
+    "NativeActions": {
+      "Targets": "Targets",
+      "dash": {
+        "Label": "Dash",
+        "Tooltip": "Dash — left-click: declare the action; right-click: open the D&D rule."
+      },
+      "disengage": {
+        "Label": "Disengage",
+        "Tooltip": "Disengage — left-click: declare the action; right-click: open the D&D rule."
+      },
+      "dodge": {
+        "Label": "Dodge",
+        "Tooltip": "Dodge — left-click: declare the action; right-click: open the D&D rule."
+      },
+      "help": {
+        "Label": "Help",
+        "Tooltip": "Help — left-click: declare the action; right-click: open the D&D rule."
+      },
+      "hide": {
+        "Label": "Hide",
+        "Tooltip": "Hide — left-click: declare the action and roll Stealth; right-click: open the D&D rule."
+      },
+      "ready": {
+        "Label": "Ready",
+        "Tooltip": "Ready — left-click: declare the action; right-click: open the D&D rule."
+      }
     }
   }
 }

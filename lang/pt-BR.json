@@ -78,7 +78,9 @@
         "Midi": {
           "Legend": "Midi-QoL"
         }
-      }
+      },
+      "EnableNativeGenericActions": "Ativar Ações Nativas do D&D",
+      "EnableNativeGenericActionsHint": "Mostra no HUD as ações comuns Correr, Desengajar, Esquivar, Ajudar, Esconder e Preparar sem exigir CPR ou Midi-QoL."
     },
     "AutoPopulate": {
       "Groups": {
@@ -214,11 +216,39 @@
       "SlotOccupiedByTwoHandedWeapon": "Este espaço está ocupado por uma arma de duas mãos",
       "FailedToRollInitiative": "Falha ao rolar iniciativa",
       "ActivityNotFound": "Atividade não encontrada",
-      "ActivityCannotBeUsed": "Atividade não pode ser usada"
+      "ActivityCannotBeUsed": "Atividade não pode ser usada",
+      "NativeActionError": "Erro ao executar a ação {action}"
     },
     "AutoPopulateOptions": {
       "IncludeActivities": "Incluir Atividades Individuais",
       "IncludeActivitiesHint": "Quando habilitado, itens com múltiplas atividades (ex: armas de Arremesso) adicionam cada atividade separadamente, em vez do item principal"
+    },
+    "NativeActions": {
+      "Targets": "Alvos",
+      "dash": {
+        "Label": "Correr",
+        "Tooltip": "Correr — clique esquerdo: declarar a ação; clique direito: abrir a regra do D&D."
+      },
+      "disengage": {
+        "Label": "Desengajar",
+        "Tooltip": "Desengajar — clique esquerdo: declarar a ação; clique direito: abrir a regra do D&D."
+      },
+      "dodge": {
+        "Label": "Esquivar",
+        "Tooltip": "Esquivar — clique esquerdo: declarar a ação; clique direito: abrir a regra do D&D."
+      },
+      "help": {
+        "Label": "Ajudar",
+        "Tooltip": "Ajudar — clique esquerdo: declarar a ação; clique direito: abrir a regra do D&D."
+      },
+      "hide": {
+        "Label": "Esconder",
+        "Tooltip": "Esconder — clique esquerdo: declarar a ação e rolar Furtividade; clique direito: abrir a regra do D&D."
+      },
+      "ready": {
+        "Label": "Preparar",
+        "Tooltip": "Preparar — clique esquerdo: declarar a ação; clique direito: abrir a regra do D&D."
+      }
     }
   }
 }

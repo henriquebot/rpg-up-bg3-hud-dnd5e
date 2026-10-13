@@ -12,6 +12,7 @@ import { createDnD5eWeaponSetContainer } from './components/containers/DnD5eWeap
 import { DnD5eInfoContainer } from './components/containers/DnD5eInfoContainer.js';
 import { DnD5eAdvContainer } from './components/containers/DnD5eAdvContainer.js';
 import { DnD5eCPRGenericActionsContainer } from './components/containers/DnD5eCPRGenericActionsContainer.js';
+import { DnD5eNativeActionsContainer } from './components/containers/DnD5eNativeActionsContainer.js';
 import { isContainer, getContainerContents, saveContainerContents } from './components/containers/DnD5eContainerPopover.js';
 import { DnD5eAutoSort } from './features/DnD5eAutoSort.js';
 import { DnD5eAutoPopulate } from './features/DnD5eAutoPopulate.js';
@@ -98,10 +99,14 @@ Hooks.on('bg3HudReady', async (BG3HUD_API) => {
     });
 
     // Optional left-rail containers (core lays out by region/order; ids stay adapter-owned)
-    // CPR sits left of ADV (lower order renders first in the left region)
-    BG3HUD_API.registerContainer('cprGenericActions', DnD5eCPRGenericActionsContainer, {
+    // Native D&D actions require no CPR/Midi. CPR remains available as an optional integration.
+    BG3HUD_API.registerContainer('nativeGenericActions', DnD5eNativeActionsContainer, {
         region: 'left',
         order: 10
+    });
+    BG3HUD_API.registerContainer('cprGenericActions', DnD5eCPRGenericActionsContainer, {
+        region: 'left',
+        order: 15
     });
     BG3HUD_API.registerContainer('situationalBonuses', DnD5eAdvContainer, {
         region: 'left',

@@ -63,3 +63,7 @@ Found a bug? Have a feature request?
 * Join the discussion on [Discord](https://discord.gg/bnVCtQuyMr).
 
 <!-- RPG Up release trigger: 0.7.2 -->
+
+### RPG Up native actions
+
+The fork includes a lightweight, dependency-free action strip for **Dash, Disengage, Dodge, Help, Hide, and Ready**. It uses D&D5e rule references and the native Actor roll API; CPR and Midi-QoL are not required. Left-click declares the action in chat, right-click opens the D&D rule, and Hide also rolls Stealth.

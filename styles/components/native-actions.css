@@ -1,0 +1,55 @@
+/* RPG Up native generic D&D actions */
+
+#bg3-hotbar-container .bg3-native-actions-container {
+    display: grid;
+    grid-template-columns: repeat(2, 26px);
+    grid-auto-rows: 49px;
+    gap: 5px;
+    margin: 1px 0;
+    align-content: start;
+}
+
+#bg3-hotbar-container .bg3-native-actions-container .bg3-native-action-btn {
+    width: 26px;
+    min-width: 26px;
+    height: 49px;
+    margin: 0;
+    padding: 0;
+    border: var(--bg3-border-size) solid var(--bg3-border-color);
+    border-radius: var(--bg3-border-radius, 8px);
+    background: var(--bg3-background-color);
+    color: var(--bg3-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+#bg3-hotbar-container .bg3-native-actions-container .bg3-native-action-btn:hover {
+    border-color: var(--bg3-border-color-hover);
+    background: var(--bg3-background-color-hover);
+    color: var(--bg3-text-color-hover);
+}
+
+#bg3-hotbar-container .bg3-native-actions-container .bg3-native-action-btn i {
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.chat-message .bg3-native-action-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.chat-message .bg3-native-action-chat-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.chat-message .bg3-native-action-targets {
+    opacity: 0.8;
+    font-size: 0.9em;
+}

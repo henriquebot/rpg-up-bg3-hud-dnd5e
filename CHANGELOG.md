@@ -1,3 +1,12 @@
+## [0.7.3] - 2026-10-13
+
+### RPG Up fork
+- Added dependency-free native D&D generic actions to the BG3 HUD: Dash, Disengage, Dodge, Help, Hide, and Ready.
+- Left-click declares the action in chat using the D&D5e system rule reference; right-click opens the rule page.
+- Hide also rolls Stealth through D&D5e's native Actor API.
+- Using one of these actions marks the BG3 HUD Action filter as used; the core resets it on combat turn changes.
+- CPR and Midi-QoL are not required for these buttons.
+
 ## [0.7.2] - 2026-10-12
 
 ### RPG Up fork
