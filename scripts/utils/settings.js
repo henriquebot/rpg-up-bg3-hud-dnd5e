@@ -259,6 +259,16 @@ export function registerSettings() {
     default: true
   });
 
+  // Lightweight native generic actions (Dash, Disengage, Dodge, Help, Hide, Ready)
+  game.settings.register(MODULE_ID, 'enableNativeGenericActions', {
+    name: `${MODULE_ID}.Settings.EnableNativeGenericActions`,
+    hint: `${MODULE_ID}.Settings.EnableNativeGenericActionsHint`,
+    scope: 'world',
+    config: false,
+    type: Boolean,
+    default: true
+  });
+
   // CPR Generic Actions button setting (vertical button next to adv container)
   game.settings.register(MODULE_ID, 'enableCPRGenericActions', {
     name: `${MODULE_ID}.Settings.EnableCPRGenericActions`,
@@ -407,7 +417,7 @@ export function registerSettings() {
     moduleId: MODULE_ID,
     titleKey: `${MODULE_ID}.Settings.Display.MenuTitle`,
     sections: [
-      { legend: `${MODULE_ID}.Settings.Display.Legend`, keys: ['showItemNames', 'showItemUses', 'showHealthOverlay', 'defaultPortraitImageSource', 'showHPControls', 'hideDeathSaves'] }
+      { legend: `${MODULE_ID}.Settings.Display.Legend`, keys: ['showItemNames', 'showItemUses', 'showHealthOverlay', 'defaultPortraitImageSource', 'showHPControls', 'hideDeathSaves', 'enableNativeGenericActions'] }
     ]
   });
 
