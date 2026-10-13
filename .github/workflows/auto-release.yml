@@ -1,4 +1,4 @@
-name: Auto Release
+name: RPG Up Fork Release
 
 on:
   push:
@@ -77,7 +77,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
-          name: Release ${{ steps.tag.outputs.tag }}
+          name: RPG Up Fork ${{ steps.tag.outputs.tag }}
           body: ${{ env.CHANGELOG }}
           files: |
             bg3-hud-dnd5e.zip
@@ -85,35 +85,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish to Foundry VTT
+      - name: Fork release note
         run: |
-          # Construct the manifest and notes URLs using the version
-          MANIFEST_URL="https://github.com/${{ github.repository }}/releases/download/${{ env.VERSION }}/module.json"
-          NOTES_URL="https://github.com/${{ github.repository }}/releases/tag/${{ env.VERSION }}"
-          
-          # Create the release payload
-          payload=$(cat <<EOF
-          {
-            "id": "${{ env.PACKAGE_ID }}",
-            "release": {
-              "version": "${{ env.VERSION }}",
-              "manifest": "$MANIFEST_URL",
-              "notes": "$NOTES_URL",
-              "compatibility": {
-                "minimum": "${{ env.MIN_CORE }}",
-                "verified": "${{ env.VERIFIED_CORE }}",
-                "maximum": "${{ env.MAX_CORE }}"
-              }
-            }
-          }
-          EOF
-          )
-          
-          # Send the release to Foundry VTT
-          curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: ${{ secrets.FOUNDRY_RELEASE_TOKEN }}" \
-            -d "$payload" \
-            https://api.foundryvtt.com/_api/packages/release_version/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "Fork release created. Foundry package registry publishing is intentionally disabled in this fork."

@@ -1,5 +1,8 @@
 # BG3 Inspired HUD - D&D5e
 
+> **RPG Up fork:** this repository is a compatibility fork of BragginRites/bg3-hud-dnd5e. The fork keeps the original module id `bg3-hud-dnd5e` so it can register with BG3 Inspired HUD Core, and targets D&D5e 6.x on Foundry VTT 14. Use this fork instead of the upstream D&D5e adapter when running D&D5e 6.x.
+
+
 ![Foundry Version](https://img.shields.io/badge/Foundry-v13-orange)
 [![Patreon](https://img.shields.io/badge/Patreon-Support-red?logo=patreon)](https://www.patreon.com/BragginRites)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Buy%20Coffee-blue?logo=ko-fi)](https://ko-fi.com/bragginrites)
