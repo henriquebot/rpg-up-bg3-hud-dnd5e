@@ -3,89 +3,70 @@ name: RPG Up Fork Release
 on:
   workflow_dispatch:
   push:
+    paths:
+      - "module.json"
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Extract Version from module.json
-        id: get_version
+      - name: Read module metadata
+        id: meta
+        shell: bash
         run: |
-          # Using jq to parse the version field from module.json at repo root
-          VERSION=$(jq -r '.version' module.json)
-          echo "Found version: $VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "::set-output name=version::$VERSION"
-          # Also extract package ID and compatibility
-          PACKAGE_ID=$(jq -r '.id' module.json)
-          MIN_CORE=$(jq -r '.compatibility.minimum' module.json)
-          VERIFIED_CORE=$(jq -r '.compatibility.verified' module.json)
-          MAX_CORE=$(jq -r '.compatibility.maximum // ""' module.json)
-          echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
-          echo "MIN_CORE=$MIN_CORE" >> $GITHUB_ENV
-          echo "VERIFIED_CORE=$VERIFIED_CORE" >> $GITHUB_ENV
-          echo "MAX_CORE=$MAX_CORE" >> $GITHUB_ENV
+          VERSION="$(jq -r '.version' module.json)"
+          PACKAGE_ID="$(jq -r '.id' module.json)"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "package_id=$PACKAGE_ID" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
-      - name: Extract Latest Changelog Entry
-        id: get_changelog
+      - name: Validate fork manifest
+        shell: bash
         run: |
-          # Extract the latest version entry from CHANGELOG.md, skipping the version header
-          CHANGELOG=$(awk '
-            /^## \[[0-9]+\.[0-9]+\.[0-9]+/ {
-              if (p) { exit }
-              p=1
-              next
-            }
-            p { print }
-          ' CHANGELOG.md | sed '/^[[:space:]]*$/d')
-          
-          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-          echo "$CHANGELOG" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          test "$(jq -r '.id' module.json)" = "bg3-hud-dnd5e"
+          test "$(jq -r '.relationships.systems[] | select(.id=="dnd5e") | .compatibility.maximum' module.json)" = "6.999.999"
+          test "$(jq -r '.relationships.systems[] | select(.id=="dnd5e") | .compatibility.verified' module.json)" = "6.0.5"
 
-      - name: Configure Git
+      - name: Build module ZIP
+        shell: bash
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          rm -f bg3-hud-dnd5e.zip
+          zip -r bg3-hud-dnd5e.zip .             -x ".git/*"                ".github/*"                ".vscode/*"                "bg3-hud-dnd5e.zip"
 
-      - name: Create Git Tag
-        id: tag
+      - name: Create or update tag
+        shell: bash
         run: |
-          TAG="${{ env.VERSION }}"
-          echo "Creating tag: $TAG"
-          git tag "$TAG"
-          git push origin "$TAG"
-          echo "::set-output name=tag::$TAG"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Create Module ZIP
-        run: |
-          # Zip everything in the repo except hidden folders/files we don't need
-          zip -r bg3-hud-dnd5e.zip . \
-            -x "*.git*" \
-               ".github*" \
-               "*.vscode*"
+          if git ls-remote --exit-code --tags origin "refs/tags/$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists; reusing it."
+          else
+            git tag "$VERSION"
+            git push origin "$VERSION"
+          fi
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          name: RPG Up Fork ${{ steps.tag.outputs.tag }}
-          body: ${{ env.CHANGELOG }}
+          tag_name: ${{ steps.meta.outputs.version }}
+          name: RPG Up Fork ${{ steps.meta.outputs.version }}
+          body: |
+            RPG Up compatibility fork for D&D5e 6.x / Foundry VTT 14.
+            Target tested manifest: D&D5e 6.0.5 and Foundry VTT 14.368.
           files: |
             bg3-hud-dnd5e.zip
             module.json
+          make_latest: true
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Fork release note
-        run: |
-          echo "Fork release created. Foundry package registry publishing is intentionally disabled in this fork."
