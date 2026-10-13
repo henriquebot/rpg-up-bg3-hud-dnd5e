@@ -1,3 +1,11 @@
+## [0.7.2] - 2026-10-12
+
+### RPG Up fork
+- Expanded system compatibility to D&D5e 6.x and verified the fork target against D&D5e 6.0.5 on Foundry VTT 14.368.
+- Fork manifest and release URLs now point to `henriquebot/rpg-up-bg3-hud-dnd5e`.
+- Disabled automatic publishing to the official Foundry package registry from this fork.
+- This release is the compatibility-unblock build; runtime regressions specific to D&D5e 6.x will be fixed as they are identified in play testing.
+
 ## [0.7.1] - 2026-10-05
 
 Requires **bg3-hud-core 0.7.1**.
