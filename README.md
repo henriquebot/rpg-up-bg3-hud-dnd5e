@@ -61,3 +61,5 @@ This module is an independent fan creation, drawing inspiration from the excelle
 Found a bug? Have a feature request?
 * Submit issues via [GitHub Issues](https://github.com/BragginRites/bg3-hud-dnd5e/issues).
 * Join the discussion on [Discord](https://discord.gg/bnVCtQuyMr).
+
+<!-- RPG Up release trigger: 0.7.2 -->
