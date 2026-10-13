@@ -266,7 +266,8 @@ export function registerSettings() {
     scope: 'world',
     config: false,
     type: Boolean,
-    default: true
+    default: true,
+    onChange: () => ui.BG3HUD_APP?.refresh?.()
   });
 
   // CPR Generic Actions button setting (vertical button next to adv container)
