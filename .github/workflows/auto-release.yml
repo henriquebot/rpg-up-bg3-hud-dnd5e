@@ -1,6 +1,7 @@
 name: RPG Up Fork Release
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
